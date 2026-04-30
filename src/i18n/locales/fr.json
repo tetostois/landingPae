@@ -11,17 +11,229 @@
     "facebook": "Facebook",
     "twitter": "X (Twitter)",
     "linkedin": "LinkedIn",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "search": "Rechercher"
   },
   "nav": {
     "home": "Accueil",
     "about": "À propos",
     "services": "Services",
+    "servicesMenu": "Ouvrir le menu des services",
+    "backToServices": "Tous les services",
     "apiDocs": "API Docs",
     "contact": "Contact",
     "blog": "Blog",
     "signIn": "Connexion",
-    "signUp": "Inscription"
+    "signUp": "Inscription",
+    "portal": "Portail",
+    "documentation": "Documentation",
+    "featuresNav": "Fonctionnalités"
+  },
+  "servicePages": {
+    "collect": {
+      "pageTitle": "Encaissement en ligne",
+      "intro": "Regroupez cartes, mobile money et portefeuilles sur un même rail d’exécution, avec des règles métier cohérentes pour le pilotage de la trésorerie.",
+      "p1": "Le portail partenaire sert d’orchestrateur : vous configurez canaux, devises et règles, puis suivez chaque encaissement jusqu’au versement sur votre compte, sans multiplier les outils de conciliation.",
+      "p2": "Les tableaux de bord et webhooks alimentent votre SI : statuts, montants, frais, pour que l’opération et la compta parlent de la même chose.",
+      "bullets": {
+        "b1": "Agrégation de canaux sur un flux d’exécution unique",
+        "b2": "Règles d’acquittement et de versement alignées sur l’offre",
+        "b3": "Visibilité en temps utile côté produit et finance"
+      },
+      "outro": "Vous voulez calibrer des cas d’usage (recurring, paniers, remboursement) : notre équipe vous aide à cadrer le parcours sur votre volume."
+    },
+    "paymentLinks": {
+      "pageTitle": "Liens de paiement",
+      "intro": "Diffusez un lien de règlement quand l’intégration directe n’est pas la priorité : campagnes, devis, relance client ou usage interne.",
+      "p1": "Vous générez un lien signé, vous le partagez par e-mail, SMS ou réseau ; le payeur règle via les moyens actifs sur votre compte, le tout remontant dans le même back-office que vos flux API.",
+      "p2": "Idéal pour démarrer avant de brancher le checkout, ou pour des paiements occasionnels et à forte explicabilité côté client final.",
+      "bullets": {
+        "b1": "Création et partage sans déploiement front lourd",
+        "b2": "Mêmes moyens de paiement et mêmes règles que l’intégration",
+        "b3": "Historique et statuts unifiés avec le reste de l’activité"
+      },
+      "outro": "Besoin d’URL personnalisées ou d’échéanciers ? Nous regardons l’adéquation avec votre scénario et votre conformité."
+    },
+    "massPayouts": {
+      "pageTitle": "Paiements de masse",
+      "intro": "Programmez des virements unitaires ou des lots vers mobile money et wallets, avec des statuts traçables pour l’exploitation et l’audit.",
+      "p1": "Fichiers, API ou reprise depuis le portail : vous lancez des décaissements en masse en gardant chaque ligne identifiable (bénéficiaire, statut, motif).",
+      "p2": "Les alertes et webhooks alimentent vos outils Métier afin d’itérer sur les relances et les anomalies sans délai de traitement caché.",
+      "bullets": {
+        "b1": "Exécution en lots ou en unitaire, selon le besoin",
+        "b2": "Traçabilité bénéficiaire par bénéficiaire",
+        "b3": "Cohérence avec les encaissements sur un même compte partenaire"
+      },
+      "outro": "Scénarios de paie, partenaires ou fournisseurs : nous posons le périmètre KYC/AML en ligne avec vous."
+    },
+    "schoolFees": {
+      "pageTitle": "Frais & cotisations",
+      "intro": "Structurer l’encaissement scolaire, associatif ou d’établissements, avec des parcours de paiement clairs et un historique utile côté organisateur.",
+      "p1": "Les payeurs reçoivent un parcours simple ; vous suivez campagnes, relances et soldes, sans tableurs parallèles sur les montants reçus.",
+      "p2": "L’intégration est possible dès l’hébergement d’une visibilité portail, puis par API quand le volume d’inscriptions l’impose.",
+      "bullets": {
+        "b1": "Parcours guidé et preuve de règlement côté payeur",
+        "b2": "Suivi par cohorte, classe ou adhérent",
+        "b3": "Même tête de gondole que vos autres canaux d’encaissement"
+      },
+      "outro": "Parlez-nous de votre calendrier de collecte (trimestre, inscriptions) pour bâtir le bon rythme de relance."
+    },
+    "depositWithdraw": {
+      "pageTitle": "Dépôts & retraits",
+      "intro": "Faites transiter la trésorerie entre portefeuille partenaire, mobile money et compte bancaire, avec moins d’opérations manuelles de conciliation.",
+      "p1": "Les opérations sont tracées dans le même socle que vos paiements e-commerce, ce qui facilite le rapprochement bancaire et le contrôle de solde au quotidien.",
+      "p2": "Vous ajustez les plafonds et les moyens autorisés selon votre gouvernance, sans reconfigurer toute l’infrastructure de paiement.",
+      "bullets": {
+        "b1": "Mouvements de fonds documentés de bout en bout",
+        "b2": "Moins d’exports Excel pour comprendre « où en est l’argent »",
+        "b3": "Alignement avec le reporting d’encaissement"
+      },
+      "outro": "Les délais d’arrivée dépendent des rails et des banques : nous restons transparents sur les fenêtres opérationnelles par rail."
+    },
+    "apiSuite": {
+      "pageTitle": "API & opérations",
+      "intro": "Intégrer la passerelle Smallpay : endpoints documentés, webhooks, journaux, pour raccorder votre ERP, votre Lago ou vos microservices de commande.",
+      "p1": "Le partenaire teste d’abord en bac à sable, puis pousse en production en conservant le même modèle d’événements (succès, échec, rétrofacturation) pour l’exploitation.",
+      "p2": "Un livret OpenAPI, des exemples cURL, et le même socle sémantique que le portail web pour qu’on ne requalifie pas les statuts côté script.",
+      "bullets": {
+        "b1": "Cohérence sémantique portail & API",
+        "b2": "Webhooks pour l’orchestration interne (alertes, retours stock)",
+        "b3": "Journaux et exports prêts pour la comptabilité de synthèse"
+      },
+      "outro": "Vous avez un besoin de connecteur (SAP, NetSuite) : cadrons d’abord le flux d’événements, puis l’emballage d’intégration."
+    }
+  },
+  "blog": {
+    "pageTitle": "Blog",
+    "mainTitle": "Insights Paiement & FinTech",
+    "subtitle": "Analyses, guides techniques et repères sur les agrégateurs, l’innovation africaine et la conformité. Une sélection indépendante pour les marchands, PSP et intégrateurs.",
+    "searchLabel": "Rechercher dans le blog",
+    "searchPlaceholder": "Mots-clés, sujet, auteur…",
+    "categoriesNav": "Filtrer par catégorie",
+    "readMore": "Lire l’article",
+    "noResults": "Aucun article ne correspond à cette recherche ou à cette catégorie. Essayez d’autres mots-clés ou « Tout ».",
+    "featuredTitle": "Articles en vedette",
+    "feedTitle": "Tous les articles",
+    "specBlocksTitle": "Parcourir par thématique",
+    "categories": {
+      "all": "Tout",
+      "news": "Actualités",
+      "tutorials": "Tutoriels",
+      "caseStudies": "Études de cas",
+      "regulation": "Réglementation",
+      "security": "Sécurité",
+      "innovation": "Innovations"
+    },
+    "featured": {
+      "f1": {
+        "badge": "Tutoriels",
+        "title": "Comment choisir un agrégateur de paiement",
+        "teaser": "Du pricing au support API, de la localisation des données à la profondeur du catalogue de moyens de paiement : les critères qui font la différence entre un simple raccord et un partenaire durable.",
+        "imageAlt": "Illustration : choisir un agrégateur (schéma réseau abstrait)"
+      },
+      "f2": {
+        "badge": "Innovations",
+        "title": "Les tendances FinTech en Afrique",
+        "teaser": "Open banking, mobile money et intégrations de marché : accélérations récentes, enjeux d’inclusion et d’infrastructure, et ce qu’il faut anticiper pour 2026.",
+        "imageAlt": "Illustration : continent et flux numériques"
+      },
+      "f3": {
+        "badge": "Sécurité",
+        "title": "Sécuriser les transactions en ligne",
+        "teaser": "3-D Secure, SCA, limitation des risques, monitoring et bonnes pratiques pour rassurer clients et partenaires sans dégrader le parcours d’achat.",
+        "imageAlt": "Illustration : cadenas et parcours de paiement"
+      }
+    },
+    "posts": {
+      "p1": {
+        "title": "Intégrer l’API partenaire : authentification, webhooks, erreurs",
+        "date": "2026-02-12",
+        "author": "Nadia K.",
+        "cat": "tutorials",
+        "excerpt": "Bien lancer l’intégration d’une API de paiement, ce n’est pas seulement écrire des requêtes : c’est définir des environnements, des clés, des scénarios de secours et une observabilité minimaliste dès le premier jeton. Commencez par isoler le sandbox, versionner les contrats, et figer un jeu de comptes de test qui recouvrent succès, refus, expiration et rétrofacturation. L’émission et le rafraîchissement de jetons, les en-têtes d’idempotence et la gestion des identifiants de corrélation doivent être couverts par des politiques d’échec explicites : retry avec backoff, circuit breaker côté client, et journalisation structurée pour le support. Les webhooks ne sont pas anecdotiques : validez la signature, traitez les duplicata, accusez la réception rapidement, et ne déclenchez pas d’action irréversible uniquement sur un en-tête. Sur les routes sensibles, anticipez les incohérences de statut, les reprises partielles et les conflits de version d’événements. Côté produit, exposez le statut transactionnel côté back-office, pas seulement au checkout. Côté opérations, corrélez l’id marchand aux références acquéreur, gardez la trace des ajustements manuels et des compensations, et tenez un plan de réversion pour les pannes d’hébergement. Enfin, encadrez la rotation des clés, la séparation des rôles et l’exfiltration d’artefacts de debug : une intégration qui résiste en production, c’est une intégration documentée, testable et reproductible par une autre personne de l’équipe dans l’urgence."
+      },
+      "p2": {
+        "title": "FinTech africaine : rails locaux, inclusion et scénarios 2026",
+        "date": "2026-02-01",
+        "author": "Boris M.",
+        "cat": "innovation",
+        "excerpt": "La dynamique fintech africaine s’appuie sur des rails de paiement hétérogènes : comptes mobiles, cartes, virements instantanés, et bientôt des ponts d’ouverture compte à compte. Pour un agrégateur, la gageure est de proposer un routage fiable, des frais comparables, et un reporting qui respecte des réalités comptables distinctes, tout en gérant la variabilité des réseaux, la fraude opportuniste et l’inclusion des micro-commerces. La convergence vers des standards interopérables et des partenariats bancaires n’élimine pas le besoin d’orchestrateur : c’est lui qui abstrait l’hétérogénéité, qui surveille la succursale technique et qui simplifie l’onboarding. Les marchands demandent aujourd’hui des moteurs d’abonnement, d’escompte et d’imputation plus fins, tandis que les régulateurs rappellent l’exigence de traçabilité, de lute contre le blanchiment, et d’hébergement pédagogique des données sensibles. Les tendances 2026 côté innovation comprennent l’orchestration multi-devises avec contrôle des risques de change, l’enrichissement des scénarios de réconciliation, et des expériences d’onboarding conçues pour des équipes disposant de compétences IT inégales. Côté impact, l’inclusion n’est plus un post-scriptum : c’est le critère d’adoption, mesurable en délais de virement, en coût par transaction, et en simplicité perçue par le bénéficiaire final, du marchand de proximité à la PME en croissance qui exporte en zone."
+      },
+      "p3": {
+        "title": "Agrégateurs : comparer les offres (sans s’y perdre)",
+        "date": "2026-01-20",
+        "author": "Hélène D.",
+        "cat": "news",
+        "excerpt": "Grilles tarifaires, frais cachés, intégration technique et qualité support : un cadre de lecture pour cadrer un appel d’offres, avec une checklist marchands et intégrateurs."
+      },
+      "p4": {
+        "title": "Étude de cas : baisse des coûts d’acquisition de 18 % en six mois",
+        "date": "2026-01-08",
+        "author": "Studio Retail & Co",
+        "cat": "caseStudies",
+        "excerpt": "Comment un réseau de points de vente a re-tunnelisé le checkout, négocié de meilleures conditions d’escompte et gagné en visibilité sur le panier moyen et les taux d’abandon, avec chiffres et indicateurs d’exploitation partagés."
+      },
+      "p5": {
+        "title": "PCI DSS, KYC, AML : ce qui concrètement le marchand moyen",
+        "date": "2025-12-18",
+        "author": "Conformité & risques",
+        "cat": "regulation",
+        "excerpt": "Distinction entre exigences acquéreur, portail, et rôle du partenaire technologique : quelles preuves stocker, quelles tâches déléguer, et quels audits anticiper sans paralyser le lancement sur un marché neuf."
+      },
+      "p6": {
+        "title": "Fraude, authentification forte et 3-DS2 en pratique",
+        "date": "2025-12-02",
+        "author": "Risques & opérations",
+        "cat": "security",
+        "excerpt": "Règles de scoring, limites, listes, contrôle post-autorisation, et rôle de la 3-DS2 pour limiter le friendly fraud tout en préservant la conversion, avec retours d’exploitation terrain et pièges courants d’intégration."
+      }
+    },
+    "spec": {
+      "tutorials": {
+        "title": "Tutoriels & guides techniques",
+        "text": "Intégration API, configuration des webhooks, reprise d’erreurs, idempotence, sandbox et bascule en production. Des contenus concrets pour aller de la première requête au runbook d’exploitation."
+      },
+      "caseStudies": {
+        "title": "Études de cas & marchands",
+        "text": "Parcours de déploiement, optimisation des coûts d’encaissement, réduction d’abandon, industrialisation de la compta et du support : retours d’expérience et métriques comparables entre secteurs."
+      },
+      "compliance": {
+        "title": "Réglementation & conformité",
+        "text": "Principes PCI, identification client (KYC) et lutte contre le blanchiment (AML) dans une chaîne partagée. Ce que vous retenez pour vos processus, sans jargon inutile."
+      },
+      "security": {
+        "title": "Sécurité & bonnes pratiques",
+        "text": "Fraude, authentification forte, gestion des risques, rotation des clés, journalisation, et rôle du réseau et du code applicatif. Une lecture orientée PME, marketplace et fintechs en croissance."
+      },
+      "innovation": {
+        "title": "Innovations & tendances",
+        "text": "Open banking, interopérabilité, mobile money, stablecoins côté usage et crypto-paiements côté garde, avec toujours la même question : impact client, coût et risque, dans cet ordre."
+      }
+    },
+    "sidebar": {
+      "aria": "Informations et ressources",
+      "popularTitle": "Articles populaires",
+      "popular1": "Comment choisir un agrégateur de paiement",
+      "popular2": "Les tendances FinTech en Afrique",
+      "popular3": "Sécuriser les transactions en ligne",
+      "newsletterTitle": "La lettre Paiement & intégration",
+      "newsletterDesc": "Un résumé mensuel, sans spam, sur l’intégration, la conformité et les nouveautés produit.",
+      "emailLabel": "Votre e-mail",
+      "emailPlaceholder": "vous@entreprise.com",
+      "newsletterCta": "M’inscrire",
+      "apiTitle": "Documentation API",
+      "apiText": "Spécification OpenAPI, rôles d’endpoints, exemples cURL : tout pour brancher l’environnement partenaire proprement.",
+      "apiCta": "Ouvrir la doc API",
+      "testimonialTitle": "Témoignages & partenaires",
+      "quote1": {
+        "text": "L’onboarding de nos boutiques a été raccourci, et l’intégration de la clé a été tenable pour une équipe de trois développeurs part-time.",
+        "by": "Directrice technique, marque e-commerce (Afrique de l’Ouest)"
+      },
+      "quote2": {
+        "text": "Nous voulions un reporting lisible côté finance sans reconstruire un entrepôt : la granularité des statuts a été le critère clé.",
+        "by": "CFO, réseau de services (Europe / Afrique)"
+      }
+    }
   },
   "httpApiDoc": {
     "pageTitle": "Documentation API HTTP",
@@ -124,57 +336,105 @@
     "switchToFr": "Français"
   },
   "hero": {
-    "titleBefore": "De meilleures solutions",
-    "titleHighlight": "pour vos",
-    "titleAfter": "paiements en ligne professionnels.",
-    "sub": "Acceptez, envoyez et rapprochez vos paiements partout dans le monde avec une plateforme moderne pensée pour les équipes en croissance.",
-    "cta": "Commencer",
-    "trustNoCard": "Sans carte bancaire",
-    "trustCompanies": "Plébiscité par plus de 10 000 entreprises",
-    "altTeam": "Équipe en collaboration",
+    "titleBefore": "Centralisez vos",
+    "titleHighlight": "opérations",
+    "titleAfter": "d’encaissement et de décaissement",
+    "sub": "Smallpay orchestre la passerelle de paiement, le compte partenaire et le suivi des statuts : moins d’outils parallèles, plus de lisibilité pour vos équipes techniques et finance.",
+    "cta": "Ouvrir un compte",
+    "kpi1": "Rails adaptés à votre couverture",
+    "kpi2": "Cartes, mobile money, virements",
+    "kpi3": "Reporting & webhooks intégrés",
+    "altTeam": "Aperçu produit",
     "revenue": "Revenus",
     "processed": "Traités"
   },
   "features": {
-    "title": "Des solutions de paiement puissantes pour votre activité",
-    "learnMore": "En savoir plus",
-    "managePayments": {
-      "title": "Gérer les paiements",
-      "desc": "Centralisez cartes, virements et portefeuilles avec une visibilité en temps réel."
+    "title": "Des briques pour couvrir tout le cycle",
+    "learnMore": "Nous contacter",
+    "collect": {
+      "title": "Encaissement en ligne",
+      "desc": "Unifier cartes, mobile money et portefeuilles dans un seul fil d’exécution, avec règles et versements alignés sur votre offre."
     },
-    "checkout": {
-      "title": "Encaissement & retraits",
-      "desc": "Parcours d’achat fluide pour vos clients et versements rapides pour vos équipes."
+    "depositWithdraw": {
+      "title": "Dépôts & retraits",
+      "desc": "Faire circuler la trésorerie entre portefeuille partenaire, mobile money et compte, sans multiplier les outils de suivi."
     },
     "massPayouts": {
       "title": "Paiements de masse",
-      "desc": "Payez des milliers de bénéficiaires en un lot avec rapprochement automatisé."
+      "desc": "Programmer des lots ou des virements unitaires vers mobile money et wallets, avec statuts traçables."
     },
-    "invoices": {
-      "title": "Liens de paiement & factures",
-      "desc": "Partagez des liens de marque et des factures pros pour être payé plus vite."
+    "schoolFees": {
+      "title": "Frais & cotisations",
+      "desc": "Mettre l’encaissement scolaire ou associatif sur des parcours clairs, avec relances et historique côté organisateur."
     },
-    "api": {
-      "title": "Intégration API",
-      "desc": "API, webhooks et SDK pensés pour les développeurs, à intégrer partout."
+    "paymentLinks": {
+      "title": "Liens de paiement",
+      "desc": "Partager un lien de règlement quand l’intégration directe n’est pas prioritaire, tout en gardant le même back-office."
     },
-    "tracking": {
-      "title": "Suivi des transactions",
-      "desc": "Filtrez, recherchez et exportez chaque mouvement avec des journaux auditables."
+    "apiSuite": {
+      "title": "API & opérations",
+      "desc": "Brancher votre SI sur des endpoints documentés, consommer les webhooks, concilier avec vos exports comptables."
     }
   },
   "flex": {
-    "title": "La flexibilité pour grandir avec votre entreprise",
-    "point1Title": "Évoluer sans changer de stack",
-    "point1Desc": "Commencez simple et ajoutez marchés, devises et rails de paiement au fil de votre expansion.",
-    "point2Title": "Des indicateurs qui éclairent les décisions",
-    "point2Desc": "Tableaux de bord et exports en direct pour aligner finance et opérations.",
+    "title": "S’étendre sans exploser la complexité",
+    "point1Title": "Commencer par le portail, brancher l’API ensuite",
+    "point1Desc": "Beaucoup d’usages se traitent d’abord par le parcours partenaire : vous ajoutez l’intégration quand le volume l’impose, pas par défaut.",
+    "point2Title": "Les mêmes faits pour la tech et la finance",
+    "point2Desc": "Les statuts de transaction, les relevés et les journaux d’événements restent interprétables côté produit comme côté comptable.",
     "altTeam": "Équipe au travail",
     "gaugeCaption": "Score entreprise",
     "statUptime": "SLA de disponibilité",
     "statIntegrations": "Intégrations",
     "statChargeback": "Gestion des rétrofacturations",
     "statFraud": "Détection de fraude"
+  },
+  "aboutPage": {
+    "pageTitle": "À propos de Smallpay",
+    "heroImageAlt": "Environnement bancaire et suivi d’exploitation de paiements",
+    "introPairGroupLabel": "Illustrations mobile money",
+    "introPairAlt1": "Illustration mobile money 1",
+    "introPairAlt2": "Illustration mobile money 2",
+    "railsImageAlt": "Paiement et encaissement multicanal, vue opérations",
+    "lede": "Nous orchestrons l’encaissement en combinant notamment le mobile money (MTN Mobile Money, Orange Money) et le paiement par carte, avec le même suivi dans le portail partenaire et l’API.",
+    "p1": "Vos transactions MTN MoMo, Orange Money et par carte s’inscrivent dans le même modèle d’événements côté portail partenaire et API : produit, opérations et finance travaillent sur les mêmes statuts, sans requalification à chaque file.",
+    "p2": "L’enjeu est d’agréger ces modes plutôt que d’isoler chaque moyen dans un outil ou un export : depuis le mobile money en masse jusqu’au checkout carte, chaque parcours reste documenté pour l’exploitation et le rapprochement.",
+    "railsTitle": "Modes de transaction",
+    "railsLead": "Trois familles de rails au cœur de notre offre — à activer et combiner selon votre marché, avec une cohérence de bout en bout.",
+    "railMtnTitle": "MTN Mobile Money",
+    "railMtnBody": "Encaissements, dépôts et virements sur le compte mobile money associé à MTN : statuts, montants et frais remontent comme toute autre opération sur Smallpay, pour le pilotage et l’intégration par API.",
+    "railOrangeTitle": "Orange Money",
+    "railOrangeBody": "Paiements et mouvements sur le portefeuille Orange Money : mêmes écrans de suivi, mêmes webhooks, pour ne pas gérer ce canal « à côté » des cartes et des autres moyens.",
+    "railCardTitle": "Carte bancaire (Visa, Mastercard…)",
+    "railCardBody": "Paiement par carte sur les réseaux internationaux, aux côtés du mobile money : une vision unique des volumes, des échéanciers d’acquittement et des rétrofacturations dans le même back-office.",
+    "valuesTitle": "Ce qui nous guide",
+    "v1Title": "Clarté opérationnelle",
+    "v1Body": "Des statuts et des journaux compris de la même façon par l’ingénierie, le support et la finance — moins d’e-mails interservices pour interpréter un même paiement.",
+    "v2Title": "MTN, Orange Money et carte sur un même rail",
+    "v2Body": "Ces modes ne vivent pas dans des silos : l’orchestration est pensée pour que MTN MoMo, Orange Money et le paiement par carte se lisent de la même façon dans le portail, les exports et l’intégration API.",
+    "v3Title": "Accompagner l’adoption",
+    "v3Body": "Portail, documentation HTTP et bacs à sable pour cadrer les cas d’usage avant d’ouvrir le robinet en production, sans surprise sur le modèle d’événements.",
+    "trustTitle": "Sécurité et conformité",
+    "trustP1": "Nous travaillons selon des pratiques d’ingénierie et de gouvernance des données cohérentes avec l’accompagnement des schémas de paiement et des exigences de nos partenaires bancaires et acquéreurs.",
+    "trustP2": "L’exploitation (contrôles, journaux, tracé des accès) est pensée pour être auditable côté partenaire : vous savez quoi retenir pour vos propres preuves internes et vos échanges de conformité.",
+    "audienceTitle": "Avec qui nous travaillons",
+    "audience1": "Marchands et marques en ligne qui veulent un point de contrôle sur les encaissements et le versement.",
+    "audience2": "Plateformes, agrégateurs et PSP qui raccordent leurs commerçants sur un back-office unifié.",
+    "audience3": "Équipes IT et produit qui intègrent par API ou commencent par le portail, selon l’échéance métier.",
+    "resourcesTitle": "Aller plus loin",
+    "linkApiDocs": "Documentation HTTP (OpenAPI & exemples)",
+    "linkServices": "Parcourir les services"
+  },
+  "contactPage": {
+    "pageTitle": "Contact",
+    "lede": "Pour toute question sur l’offre, l’intégration API ou votre compte partenaire, écrivez-nous ou joignez-nous aux coordonnées ci-dessous.",
+    "imageAlt": "Service client et support Smallpay",
+    "heroH1": "Échangez avec notre équipe",
+    "heroSub": "Besoin d’aide, d’une démo ou d’un accompagnement pour votre compte partenaire ? Utilisez les coordonnées ci-dessous — nous vous répondons dans les meilleurs délais.",
+    "testimonial": "Avec Smallpay, l’encaissement, le mobile money et le suivi se lisent au même endroit. Moins d’outils décorrélés, plus de clarté pour l’opération et la trésorerie.",
+    "testimonialCite": "Responsable opérations",
+    "testimonialMeta": "Partenaire, secteur des services",
+    "followLabel": "Suivre Smallpay"
   },
   "pricing": {
     "title": "Des tarifs transparents et abordables",
@@ -195,6 +455,7 @@
     "addressLine2": "Yaoundé, Cameroun",
     "addressShort": "120 Fintech Avenue, Maison Damas",
     "phone": "+237 6 99 50 47 60",
+    "phoneTel": "+237699504760",
     "emailValue": "support{'@'}smallpaypartner.com"
   },
   "faq": {
@@ -211,6 +472,113 @@
     "title": "Faites passer votre activité au niveau supérieur",
     "button": "Commencer"
   },
+  "landingPage": {
+    "topSupport": "Support : 24h/24 et 7j/7",
+    "heroEyebrow": "SIMPLE. TRANSPARENT. SÉCURISÉ.",
+    "heroTitleBefore": "La voie intelligente pour vos ",
+    "heroTitleHighlight": "paiements en ligne",
+    "heroTitleAfter": " tout-en-un.",
+    "heroSub": "Smallpay agrège cartes, mobile money et portefeuilles sur une passerelle unique : statuts unifiés, webhooks propres et reporting lisible pour vos équipes tech et finance.",
+    "heroCtaPrimary": "Ouvrir un compte gratuit",
+    "heroAltMain": "Utilisateur consultant son moyen de paiement mobile",
+    "introTitle": "Réussir vos encaissements, où que vos clients vous paient.",
+    "intro1Title": "Paiements fluides",
+    "intro1Desc": "Encaissez sur plusieurs rails sans multiplier les connexions : un seul fil d’événements pour suivre succès, refus et versements.",
+    "intro2Title": "Sécurité & conformité",
+    "intro2Desc": "Parcours adaptés aux exigences cartes et mobile money, avec des pratiques de journalisation et de contrôle pensées pour l’audit partenaire.",
+    "intro3Title": "Couverture étendue",
+    "intro3Desc": "Activez les moyens pertinents pour vos marchés — cartes internationales et rails locaux — depuis un même portail partenaire.",
+    "introBand1Title": "Carte internationale",
+    "introBand1Desc": "Acceptez Visa, Mastercard et réseaux associés avec des statuts d’autorisation lisibles pour le support et la finance.",
+    "introBand2Title": "Encaissement rapide",
+    "introBand2Desc": "Accélérez le crédit sur compte partenaire ou mobile money grâce à un suivi temps utile des statuts et exceptions.",
+    "statsEyebrow": "DES FLUX ACTIFS SUR LA PLATEFORME",
+    "statsTitle": "Une présence pensée pour vos métiers et vos marchés",
+    "statsBody": "Marchands, plateformes et PSP utilisent Smallpay pour réconcilier les encaissements, piloter les décaissements et donner les mêmes repères au produit et à la finance.",
+    "stats1Val": "2 000+",
+    "stats1Label": "Flux suivis via API & portail",
+    "stats2Val": "99,5%",
+    "stats2Label": "Disponibilité cible infrastructure",
+    "statsAlt": "Professionnelle consultant les indicateurs sur tablette",
+    "statsBullet1Title": "Portail & API alignés",
+    "statsBullet1Desc": "Les développeurs conservent la même structure d’événements entre bac à sable et production.",
+    "statsBullet2Title": "Exploitation centralisée",
+    "statsBullet2Desc": "Webhooks, journaux et exports pour que la finance et les opérations parlent la même donnée.",
+    "showcaseTitle": "Une solution intelligente pour vos paiements",
+    "showcaseAlt": "Collaboratrice suivant les paiements depuis son ordinateur",
+    "manageTitle": "Tout piloter depuis votre espace partenaire",
+    "manageItem1Title": "Approvisionner & suivre les soldes",
+    "manageItem1Desc": "Visualisez les réserves et mouvements entre portefeuille partenaire, mobile money et banque sans rupture de trace.",
+    "manageItem2Title": "Encaissements & statuts",
+    "manageItem2Desc": "Cartes et mobile money remontent dans le même langage métier pour vos équipes support et exploitation.",
+    "manageItem3Title": "Exports & rapprochements",
+    "manageItem3Desc": "Sortez les agrégats dont votre compta a besoin ou consommez les événements par webhook.",
+    "manageAlt": "Utilisatrice consultant Smallpay sur smartphone",
+    "pricingLead": "Comparer nos formules pour encaissements, rails locaux et accompagnement.",
+    "pricingMatrixLead": "Choisissez la couverture qui correspond à votre volume et à vos marchés.",
+    "pricingFeatureCol": "Critères",
+    "pricingColEssential": "Essentiel",
+    "pricingColStandard": "Standard",
+    "pricingColPremium": "Premium",
+    "pricingR1Label": "Encaissement carte & wallet",
+    "pricingR1E": "✓",
+    "pricingR1S": "✓",
+    "pricingR1P": "✓",
+    "pricingR2Label": "Mobile money multi-régions",
+    "pricingR2E": "Option",
+    "pricingR2S": "✓",
+    "pricingR2P": "✓",
+    "pricingR3Label": "Versements & paiements de masse",
+    "pricingR3E": "—",
+    "pricingR3S": "✓",
+    "pricingR3P": "✓",
+    "pricingR4Label": "Support & onboarding",
+    "pricingR4E": "Standard",
+    "pricingR4S": "Prioritaire",
+    "pricingR4P": "Équipe dédiée",
+    "pricingR5Label": "Surveillance & SLA",
+    "pricingR5E": "Standard",
+    "pricingR5S": "Renforcé",
+    "pricingR5P": "Premium",
+    "pricingColPlan": "Offre",
+    "pricingColFee": "Frais indicatifs",
+    "pricingColLimit": "Volume / usage",
+    "pricingColMethods": "Moyens pris en charge",
+    "pricingLearnMore": "Détails",
+    "howTitle": "Démarrer pour encaisser et tracer vos flux.",
+    "howSubtitle": "Trois étapes pour brancher votre activité sur Smallpay.",
+    "howStep1Title": "Créer un compte partenaire",
+    "howStep1Desc": "Soumettez votre dossier et recevez vos accès portail avec environnement test.",
+    "howStep2Title": "Configurer rails & webhooks",
+    "howStep2Desc": "Sélectionnez cartes et mobile money, paramétrez vos URLs de notification et validez les premiers paiements.",
+    "howStep3Title": "Basculer en production",
+    "howStep3Desc": "Contrôlez les plafonds, surveillez les statuts critiques et pilotez depuis le même tableau de bord.",
+    "trustTitle": "Leader. Fiable. Pensé pour grandir avec vous.",
+    "trust1Title": "Portail & API alignés",
+    "trust1Desc": "Les mêmes statuts du sandbox à la production — moins de surprises quand vous branchez le SI.",
+    "trust2Title": "Rails cartes & mobile money",
+    "trust2Desc": "Combinez Visa, Mastercard et les portefeuilles locaux dans une stratégie d’encaissement cohérente.",
+    "trust3Title": "Support à la montée en charge",
+    "trust3Desc": "Documentation HTTP, exemples et équipes pour sécuriser vos jalons techniques.",
+    "trustCtaMid": "Documentation API",
+    "trustCtaOutline": "Écrire au support",
+    "partnersAria": "Visuels partenaires et références graphiques",
+    "learnMore": "En savoir plus",
+    "finalCtaBand": "Prêt à simplifier vos paiements professionnels ?",
+    "finalCtaBtn": "Ouvrir un compte partenaire",
+    "tabFee1": "Grille au solde",
+    "tabFee2": "2 % sur dépôt",
+    "tabFee3": "Tarifs préférentiels",
+    "tabLimit1": "Volume régulier & prévisionnel",
+    "tabLimit2": "Pas de minimum mensuel caché",
+    "tabLimit3": "Virements et mouvements ≥ 5 000 $",
+    "testimonial1": "« Les statuts sont enfin lisibles côté finance sans refaire les exports à la main. »",
+    "testimonial1By": "Directrice SI — Retail",
+    "testimonial2": "« Sandbox puis prod avec le même modèle d’événements : moins de friction pour nos développeurs. »",
+    "testimonial2By": "Lead technique — Marketplace",
+    "testimonial3": "« Cartes et mobile money dans le même cockpit opérationnel pour le support. »",
+    "testimonial3By": "Head of Ops — Services"
+  },
   "footer": {
     "links": "Liens",
     "services": "Nos services",
@@ -222,6 +590,13 @@
     "svcPayouts": "Versements",
     "svcInvoicing": "Facturation",
     "svcApi": "API",
-    "copyright": "© {year} {brand}. Tous droits réservés."
+    "copyright": "© {year} {brand}. Tous droits réservés.",
+    "blurb": "Smallpay orchestre encaissements, mobile money et décaissements pour les marchands et plateformes qui exigent des statuts clairs et une intégration API fiable.",
+    "productTitle": "Liens produit",
+    "supportTitle": "Support",
+    "addressTitle": "Notre adresse",
+    "helpCenter": "Centre d’aide",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d’utilisation"
   }
 }

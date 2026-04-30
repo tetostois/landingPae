@@ -1,4 +1,12 @@
 :root {
+  /* Charte importée depuis assets/theme/figma-colors.json */
+  --brand-teal: #00a9a4;
+  --brand-orange: #ff6400;
+  --brand-navy-deep: #010647;
+  --brand-plum: #28214c;
+  --brand-muted: #777777;
+  --brand-shell: #f3f7f7;
+
   --navy: #000b33;
   --navy-soft: #0f1a4d;
   --yellow: #f7d15e;
@@ -13,7 +21,7 @@
 }
 
 html {
-  scroll-padding-top: 88px;
+  scroll-padding-top: 116px;
 }
 
 *,
@@ -25,6 +33,7 @@ html {
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   color: var(--navy);
   background: var(--white);
   line-height: 1.6;

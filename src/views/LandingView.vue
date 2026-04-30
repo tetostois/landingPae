@@ -1,990 +1,1231 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-const { t, locale } = useI18n()
+import { RouterLink } from 'vue-router'
+import { SERVICES } from '@/data/services'
+import ServiceNavIcon from '@/components/ServiceNavIcon.vue'
 
-const openFaq = ref<number | null>(0)
+import imgHero from '@/assets/imSvg/4.png'
+import imgHeroSquiggle1 from '@/assets/imSvg/3.png'
+import imgHeroSquiggle2 from '@/assets/imSvg/13.png'
+import imgIntro1 from '@/assets/imSvg/29.png'
+import imgIntro2 from '@/assets/imSvg/34.png'
+import imgIntro3 from '@/assets/imSvg/28.png'
+import imgStats from '@/assets/imSvg/19.png'
+import imgBullet1 from '@/assets/imSvg/26.png'
+import imgBullet2 from '@/assets/imSvg/44.png'
+import imgShowcase from '@/assets/imSvg/42.png'
+import imgMidPay from '@/assets/imSvg/30.png'
+import imgManage from '@/assets/imSvg/36.png'
+import imgManageI1 from '@/assets/imSvg/27.png'
+import imgManageI2 from '@/assets/imSvg/40.png'
+import imgManageI3 from '@/assets/imSvg/22.png'
+import imgPaymentMethods from '@/assets/imSvg/37.png'
+import imgHow1 from '@/assets/imSvg/12.png'
+import imgHow2 from '@/assets/imSvg/33.png'
+import imgHow3 from '@/assets/imSvg/34.png'
+import imgPartner46 from '@/assets/imSvg/46.png'
+import imgPartner47 from '@/assets/imSvg/47.png'
+import imgPartner48 from '@/assets/imSvg/48.png'
+import imgPartner49 from '@/assets/imSvg/49.png'
+import imgPartner50 from '@/assets/imSvg/50.png'
+import imgPartner51 from '@/assets/imSvg/51.png'
 
-const faqs = computed(() => [
-  { q: t('faq.q1'), a: t('faq.a1') },
-  { q: t('faq.q2'), a: t('faq.a2') },
-  { q: t('faq.q3'), a: t('faq.a3') },
+const { t } = useI18n()
+
+const partnerPortalRegisterUrl = 'https://phoenix.small-pay.com/partner-portal/register'
+
+const servicesTop = computed(() => [...SERVICES].slice(0, 3))
+const servicesBottom = computed(() => [...SERVICES].slice(3, 6))
+
+const pricingMatrix = computed(() => [
+  {
+    label: t('landingPage.pricingR1Label'),
+    cells: [t('landingPage.pricingR1E'), t('landingPage.pricingR1S'), t('landingPage.pricingR1P')],
+  },
+  {
+    label: t('landingPage.pricingR2Label'),
+    cells: [t('landingPage.pricingR2E'), t('landingPage.pricingR2S'), t('landingPage.pricingR2P')],
+  },
+  {
+    label: t('landingPage.pricingR3Label'),
+    cells: [t('landingPage.pricingR3E'), t('landingPage.pricingR3S'), t('landingPage.pricingR3P')],
+  },
+  {
+    label: t('landingPage.pricingR4Label'),
+    cells: [t('landingPage.pricingR4E'), t('landingPage.pricingR4S'), t('landingPage.pricingR4P')],
+  },
+  {
+    label: t('landingPage.pricingR5Label'),
+    cells: [t('landingPage.pricingR5E'), t('landingPage.pricingR5S'), t('landingPage.pricingR5P')],
+  },
 ])
 
-function toggleFaq(i: number) {
-  openFaq.value = openFaq.value === i ? null : i
+const partnerLogos = [
+  imgPartner46,
+  imgPartner47,
+  imgPartner48,
+  imgPartner49,
+  imgPartner50,
+  imgPartner51,
+]
+
+const howSteps = computed(() => [
+  { img: imgHow1, title: t('landingPage.howStep1Title'), desc: t('landingPage.howStep1Desc') },
+  { img: imgHow2, title: t('landingPage.howStep2Title'), desc: t('landingPage.howStep2Desc') },
+  { img: imgHow3, title: t('landingPage.howStep3Title'), desc: t('landingPage.howStep3Desc') },
+])
+
+function isFeaturedTop(idx: number) {
+  return idx === 1
 }
-
-const partnerPortalLoginUrl =
-  'https://phoenix.small-pay.com/partner-portal/login?returnUrl=%2Fdashboard'
-
-const heroImg =
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&h=700&fit=crop'
-const flexImg =
-  'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop'
 </script>
 
 <template>
-  <main class="landing-main">
-      <section id="home" class="hero section">
-        <div class="hero__grid container">
-          <div class="hero__copy">
-            <h1 class="hero__title">
-              {{ t('hero.titleBefore') }}
-              <span class="brush">{{ t('hero.titleHighlight') }}</span>
-              {{ t('hero.titleAfter') }}
-            </h1>
-            <p class="hero__sub">
-              {{ t('hero.sub') }}
-            </p>
+  <main class="gp">
+    <!-- Hero -->
+    <section id="home" class="gp-hero section gp-hero--waves">
+      <div class="container gp-hero__grid">
+        <div class="gp-hero__copy">
+          <p class="gp-hero__eyebrow">{{ t('landingPage.heroEyebrow') }}</p>
+          <h1 class="gp-hero__title">
+            {{ t('landingPage.heroTitleBefore') }}
+            <span class="gp-hero__title-mark">{{ t('landingPage.heroTitleHighlight') }}</span>
+            {{ t('landingPage.heroTitleAfter') }}
+          </h1>
+          <p class="gp-hero__sub">{{ t('landingPage.heroSub') }}</p>
+          <div class="gp-hero__ctas">
             <a
-              :href="partnerPortalLoginUrl"
-              class="btn btn--yellow hero__cta"
+              :href="partnerPortalRegisterUrl"
+              class="gp-btn gp-btn--orange"
               target="_blank"
               rel="noopener noreferrer"
-            >{{ t('hero.cta') }}</a>
-            <div class="hero__trust">
-              <span class="trust-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                {{ t('hero.trustNoCard') }}
-              </span>
-              <span class="trust-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-                {{ t('hero.trustCompanies') }}
-              </span>
-            </div>
-          </div>
-          <div class="hero__visual">
-            <div class="hero__photo-wrap">
-              <img :src="heroImg" :alt="t('hero.altTeam')" class="hero__photo" width="900" height="700" />
-              <div class="float-card float-card--chart">
-                <div class="mini-bars">
-                  <span /><span /><span /><span />
-                </div>
-                <span class="float-card__label">{{ t('hero.revenue') }}</span>
-              </div>
-              <div class="float-card float-card--stat">
-                <strong>2,000,000</strong>
-                <span>{{ t('hero.processed') }}</span>
-              </div>
-              <div class="float-card float-card--badge">100</div>
-            </div>
+              >{{ t('landingPage.heroCtaPrimary') }}</a
+            >
           </div>
         </div>
-      </section>
+        <div class="gp-hero__visual">
+          <div class="gp-hero__deco" aria-hidden="true">
+            <span class="gp-hero__blob" />
+            <span class="gp-hero__ring gp-hero__ring--solid" />
+            <span class="gp-hero__ring gp-hero__ring--dashed" />
+            <span class="gp-hero__arc gp-hero__arc--teal" />
+            <span class="gp-hero__arc gp-hero__arc--orange gp-hero__arc--o1" />
+            <span class="gp-hero__arc gp-hero__arc--orange gp-hero__arc--o2" />
+            <img class="gp-hero__squiggle gp-hero__squiggle--tl" :src="imgHeroSquiggle1" alt="" width="96" height="96" />
+            <img class="gp-hero__squiggle gp-hero__squiggle--br" :src="imgHeroSquiggle2" alt="" width="96" height="96" />
+          </div>
+          <img class="gp-hero__photo" :src="imgHero" :alt="t('landingPage.heroAltMain')" width="800" height="900" />
+        </div>
+      </div>
+    </section>
 
-      <section id="services" class="section features">
-        <div class="container features__head">
-          <h2 class="section-title">{{ t('features.title') }}</h2>
-          <a href="#contact" class="btn btn--outline">{{ t('features.learnMore') }}</a>
-        </div>
-        <div class="container features__grid">
-          <article class="feature-card">
-            <div class="feature-card__icon feature-card__icon--1">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="5" width="20" height="14" rx="2" />
-                <path d="M2 10h20" />
-              </svg>
-            </div>
-            <h3>{{ t('features.managePayments.title') }}</h3>
-            <p>{{ t('features.managePayments.desc') }}</p>
+    <!-- Intro + bandeau 2 cartes -->
+    <section class="gp-intro section section--muted">
+      <div class="container">
+        <h2 class="gp-section-title">{{ t('landingPage.introTitle') }}</h2>
+        <div class="gp-intro__grid">
+          <article class="gp-intro-card">
+            <img class="gp-intro-card__icon" :src="imgIntro1" alt="" width="72" height="72" loading="lazy" />
+            <h3>{{ t('landingPage.intro1Title') }}</h3>
+            <p>{{ t('landingPage.intro1Desc') }}</p>
           </article>
-          <article class="feature-card">
-            <div class="feature-card__icon feature-card__icon--2">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
-                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
-                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
-              </svg>
-            </div>
-            <h3>{{ t('features.checkout.title') }}</h3>
-            <p>{{ t('features.checkout.desc') }}</p>
+          <article class="gp-intro-card">
+            <img class="gp-intro-card__icon" :src="imgIntro2" alt="" width="72" height="72" loading="lazy" />
+            <h3>{{ t('landingPage.intro2Title') }}</h3>
+            <p>{{ t('landingPage.intro2Desc') }}</p>
           </article>
-          <article class="feature-card">
-            <div class="feature-card__icon feature-card__icon--3">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="8" cy="8" r="6" />
-                <circle cx="16" cy="8" r="6" />
-                <path d="M9.9 14a6 6 0 0 0 4.1 4" />
-              </svg>
-            </div>
-            <h3>{{ t('features.massPayouts.title') }}</h3>
-            <p>{{ t('features.massPayouts.desc') }}</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon feature-card__icon--4">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
-              </svg>
-            </div>
-            <h3>{{ t('features.invoices.title') }}</h3>
-            <p>{{ t('features.invoices.desc') }}</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon feature-card__icon--5">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
-              </svg>
-            </div>
-            <h3>{{ t('features.api.title') }}</h3>
-            <p>{{ t('features.api.desc') }}</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon feature-card__icon--6">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8" />
-                <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
-              </svg>
-            </div>
-            <h3>{{ t('features.tracking.title') }}</h3>
-            <p>{{ t('features.tracking.desc') }}</p>
+          <article class="gp-intro-card">
+            <img class="gp-intro-card__icon" :src="imgIntro3" alt="" width="72" height="72" loading="lazy" />
+            <h3>{{ t('landingPage.intro3Title') }}</h3>
+            <p>{{ t('landingPage.intro3Desc') }}</p>
           </article>
         </div>
-      </section>
+        <div class="gp-intro-band">
+          <article class="gp-intro-band__card">
+            <h3 class="gp-intro-band__title">{{ t('landingPage.introBand1Title') }}</h3>
+            <p>{{ t('landingPage.introBand1Desc') }}</p>
+          </article>
+          <div class="gp-intro-band__rule" aria-hidden="true" />
+          <article class="gp-intro-band__card">
+            <h3 class="gp-intro-band__title">{{ t('landingPage.introBand2Title') }}</h3>
+            <p>{{ t('landingPage.introBand2Desc') }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-      <section id="about" class="section mesh">
-        <div class="container mesh__grid">
-          <div class="mesh__copy">
-            <h2 class="section-title section-title--light">{{ t('flex.title') }}</h2>
-            <ol class="mesh__list">
-              <li>
-                <span class="mesh__num">1</span>
-                <div>
-                  <h3>{{ t('flex.point1Title') }}</h3>
-                  <p>{{ t('flex.point1Desc') }}</p>
-                </div>
-              </li>
-              <li>
-                <span class="mesh__num">2</span>
-                <div>
-                  <h3>{{ t('flex.point2Title') }}</h3>
-                  <p>{{ t('flex.point2Desc') }}</p>
-                </div>
-              </li>
-            </ol>
-          </div>
-          <div class="mesh__visual">
-            <div class="mesh__photo-wrap">
-              <img :src="flexImg" :alt="t('flex.altTeam')" width="800" height="600" />
-              <div class="gauge-card">
-                <div class="gauge" aria-hidden="true">
-                  <span class="gauge__arc" />
-                  <span class="gauge__value">665</span>
-                </div>
-                <span class="gauge-card__cap">{{ t('flex.gaugeCaption') }}</span>
+    <!-- Split image / copy + bullets -->
+    <section id="about" class="gp-stats section">
+      <div class="container gp-stats__grid">
+        <div class="gp-stats__visual">
+          <div class="gp-stats__rings" aria-hidden="true" />
+          <figure class="gp-stats__figure">
+            <img :src="imgStats" :alt="t('landingPage.statsAlt')" width="560" height="560" loading="lazy" />
+          </figure>
+        </div>
+        <div class="gp-stats__copy">
+          <p class="gp-stats__eyebrow">{{ t('landingPage.statsEyebrow') }}</p>
+          <h2 class="gp-section-title gp-section-title--left">{{ t('landingPage.statsTitle') }}</h2>
+          <p class="gp-stats__lead">{{ t('landingPage.statsBody') }}</p>
+          <ul class="gp-stats__bullets">
+            <li>
+              <span class="gp-stats__bico"><img :src="imgBullet1" alt="" width="40" height="40" loading="lazy" /></span>
+              <div>
+                <strong>{{ t('landingPage.statsBullet1Title') }}</strong>
+                <p>{{ t('landingPage.statsBullet1Desc') }}</p>
               </div>
+            </li>
+            <li>
+              <span class="gp-stats__bico"><img :src="imgBullet2" alt="" width="40" height="40" loading="lazy" /></span>
+              <div>
+                <strong>{{ t('landingPage.statsBullet2Title') }}</strong>
+                <p>{{ t('landingPage.statsBullet2Desc') }}</p>
+              </div>
+            </li>
+          </ul>
+          <div class="gp-stats__mini">
+            <div class="gp-stats__pill">
+              <strong>{{ t('landingPage.stats1Val') }}</strong>
+              <span>{{ t('landingPage.stats1Label') }}</span>
+            </div>
+            <div class="gp-stats__pill">
+              <strong>{{ t('landingPage.stats2Val') }}</strong>
+              <span>{{ t('landingPage.stats2Label') }}</span>
             </div>
           </div>
         </div>
-        <div class="container mesh__stats">
-          <div>
-            <strong>99.5%</strong>
-            <span>{{ t('flex.statUptime') }}</span>
-          </div>
-          <div>
-            <strong>2K+</strong>
-            <span>{{ t('flex.statIntegrations') }}</span>
-          </div>
-          <div>
-            <strong>100%</strong>
-            <span>{{ t('flex.statChargeback') }}</span>
-          </div>
-          <div>
-            <strong>99.9%</strong>
-            <span>{{ t('flex.statFraud') }}</span>
-          </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="pricing" class="section pricing">
-        <div class="container">
-          <h2 class="section-title section-title--center">{{ t('pricing.title') }}</h2>
-          <div class="pricing__grid">
-            <article class="price-card">
-              <div class="wire-icon" aria-hidden="true">
-                <span class="wire-cube" />
-              </div>
-              <h3>{{ t('pricing.tier1Title') }}</h3>
-              <p>{{ t('pricing.tier1Desc') }}</p>
-            </article>
-            <article class="price-card">
-              <div class="wire-icon" aria-hidden="true">
-                <span class="wire-cube wire-cube--2" />
-              </div>
-              <h3>{{ t('pricing.tier2Title') }}</h3>
-              <p>{{ t('pricing.tier2Desc') }}</p>
-            </article>
-            <article class="price-card">
-              <div class="wire-icon" aria-hidden="true">
-                <span class="wire-cube wire-cube--3" />
-              </div>
-              <h3>{{ t('pricing.tier3Title') }}</h3>
-              <p>{{ t('pricing.tier3Desc') }}</p>
-            </article>
-          </div>
+    <!-- Plein écran + grille 3 + visuel + 3 -->
+    <section id="services" class="gp-showcase section section--muted">
+      <div class="container">
+        <h2 class="gp-section-title">{{ t('landingPage.showcaseTitle') }}</h2>
+      </div>
+      <div class="gp-showcase__banner">
+        <img :src="imgShowcase" :alt="t('landingPage.showcaseAlt')" width="1600" height="640" loading="lazy" />
+      </div>
+      <div class="container gp-showcase__stack">
+        <div class="gp-showcase__row">
+          <RouterLink
+            v-for="(s, idx) in servicesTop"
+            :key="'t-' + s.slug"
+            :to="`/services/${s.slug}`"
+            class="gp-feature-card"
+            :class="{ 'gp-feature-card--featured': isFeaturedTop(idx) }"
+          >
+            <div class="gp-feature-card__icon">
+              <ServiceNavIcon :name="s.icon" />
+            </div>
+            <h3>{{ t(`features.${s.featureKey}.title`) }}</h3>
+            <p>{{ t(`features.${s.featureKey}.desc`) }}</p>
+            <span
+              class="gp-feature-card__cta"
+              :class="{ 'gp-feature-card__cta--orange': isFeaturedTop(idx) }"
+              >{{ t('landingPage.learnMore') }}</span
+            >
+          </RouterLink>
         </div>
-      </section>
 
-      <section id="contact" class="section contact">
-        <div class="container contact__grid">
-          <div class="contact__intro">
-            <h2 class="section-title">{{ t('contact.title') }}</h2>
-            <p class="contact__sub">{{ t('contact.sub') }}</p>
-            <div class="social-row">
-              <a href="#" class="social" :aria-label="t('a11y.facebook')">f</a>
-              <a href="#" class="social" :aria-label="t('a11y.twitter')">X</a>
-              <a href="#" class="social" :aria-label="t('a11y.linkedin')">in</a>
-              <a href="#" class="social" :aria-label="t('a11y.instagram')">◎</a>
-            </div>
-          </div>
-          <div class="contact__card">
-            <div class="contact__row">
-              <span class="contact__label">{{ t('contact.location') }}</span>
-              <p>{{ t('contact.addressLine1') }}<br />{{ t('contact.addressLine2') }}</p>
-            </div>
-            <div class="contact__row">
-              <span class="contact__label">{{ t('contact.email') }}</span>
-              <p>
-                <a :href="'mailto:' + t('contact.emailValue')">{{ t('contact.emailValue') }}</a>
-              </p>
-            </div>
-            <div class="contact__row">
-              <span class="contact__label">{{ t('contact.whatsapp') }}</span>
-              <p>
-                <a href="tel:+15551234567">{{ t('contact.phone') }}</a>
-              </p>
-            </div>
-          </div>
+        <div class="gp-showcase__mid">
+          <img :src="imgMidPay" alt="" width="520" height="320" loading="lazy" />
         </div>
-      </section>
 
-      <section class="section faq">
-        <div class="container faq__inner">
-          <h2 class="section-title section-title--center">{{ t('faq.title') }}</h2>
-          <p class="faq__sub">{{ t('faq.sub') }}</p>
-          <ul class="faq__list">
-            <li v-for="(item, i) in faqs" :key="locale + '-' + i" class="faq__item">
-              <button type="button" class="faq__q" @click="toggleFaq(i)">
-                {{ item.q }}
-                <span class="faq__toggle">{{ openFaq === i ? '−' : '+' }}</span>
-              </button>
-              <div v-show="openFaq === i" class="faq__a">
-                {{ item.a }}
+        <div class="gp-showcase__row">
+          <RouterLink v-for="s in servicesBottom" :key="'b-' + s.slug" :to="`/services/${s.slug}`" class="gp-feature-card">
+            <div class="gp-feature-card__icon">
+              <ServiceNavIcon :name="s.icon" />
+            </div>
+            <h3>{{ t(`features.${s.featureKey}.title`) }}</h3>
+            <p>{{ t(`features.${s.featureKey}.desc`) }}</p>
+            <span class="gp-feature-card__cta">{{ t('landingPage.learnMore') }}</span>
+          </RouterLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- Manage -->
+    <section class="gp-manage section">
+      <div class="container gp-manage__grid">
+        <div class="gp-manage__copy">
+          <h2 class="gp-section-title gp-section-title--left">{{ t('landingPage.manageTitle') }}</h2>
+          <ul class="gp-manage__list">
+            <li>
+              <span class="gp-manage__ico"><img :src="imgManageI1" alt="" width="44" height="44" loading="lazy" /></span>
+              <div>
+                <h3>{{ t('landingPage.manageItem1Title') }}</h3>
+                <p>{{ t('landingPage.manageItem1Desc') }}</p>
+              </div>
+            </li>
+            <li>
+              <span class="gp-manage__ico"><img :src="imgManageI2" alt="" width="44" height="44" loading="lazy" /></span>
+              <div>
+                <h3>{{ t('landingPage.manageItem2Title') }}</h3>
+                <p>{{ t('landingPage.manageItem2Desc') }}</p>
+              </div>
+            </li>
+            <li>
+              <span class="gp-manage__ico"><img :src="imgManageI3" alt="" width="44" height="44" loading="lazy" /></span>
+              <div>
+                <h3>{{ t('landingPage.manageItem3Title') }}</h3>
+                <p>{{ t('landingPage.manageItem3Desc') }}</p>
               </div>
             </li>
           </ul>
         </div>
-      </section>
-
-      <section class="section mesh mesh--cta">
-        <div class="container cta-row">
-          <h2 class="section-title section-title--light cta-row__title">{{ t('cta.title') }}</h2>
-          <a
-            :href="partnerPortalLoginUrl"
-            class="btn btn--yellow"
-            target="_blank"
-            rel="noopener noreferrer"
-          >{{ t('cta.button') }}</a>
+        <div class="gp-manage__visual">
+          <div class="gp-manage__rings" aria-hidden="true" />
+          <img class="gp-manage__photo" :src="imgManage" :alt="t('landingPage.manageAlt')" width="720" height="900" loading="lazy" />
         </div>
-      </section>
+      </div>
+    </section>
+
+    <!-- Matrice tarifs -->
+    <section id="pricing" class="gp-pricing section section--muted">
+      <div class="container">
+        <h2 class="gp-section-title">{{ t('pricing.title') }}</h2>
+        <p class="gp-pricing__lead">{{ t('landingPage.pricingLead') }}</p>
+        <p class="gp-pricing__sublead">{{ t('landingPage.pricingMatrixLead') }}</p>
+        <div class="gp-table-wrap">
+          <table class="gp-matrix">
+            <thead>
+              <tr>
+                <th>{{ t('landingPage.pricingFeatureCol') }}</th>
+                <th>{{ t('landingPage.pricingColEssential') }}</th>
+                <th>{{ t('landingPage.pricingColStandard') }}</th>
+                <th>{{ t('landingPage.pricingColPremium') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(row, i) in pricingMatrix" :key="i">
+                <th scope="row">{{ row.label }}</th>
+                <td v-for="(cell, j) in row.cells" :key="j">{{ cell }}</td>
+              </tr>
+              <tr class="gp-matrix__methods-row">
+                <th scope="row">{{ t('landingPage.pricingColMethods') }}</th>
+                <td colspan="3" class="gp-matrix__methods-cell">
+                  <img :src="imgPaymentMethods" alt="" width="260" height="44" loading="lazy" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comment ça marche -->
+    <section class="gp-how section">
+      <div class="container">
+        <h2 class="gp-section-title gp-section-title--inv">{{ t('landingPage.howTitle') }}</h2>
+        <p class="gp-how__sub">{{ t('landingPage.howSubtitle') }}</p>
+        <div class="gp-steps" role="list">
+          <article v-for="(step, i) in howSteps" :key="i" class="gp-step" role="listitem">
+            <div class="gp-step__num">{{ i + 1 }}</div>
+            <img class="gp-step__img" :src="step.img" alt="" width="72" height="72" loading="lazy" />
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.desc }}</p>
+            <RouterLink to="/contact" class="gp-step__link">{{ t('landingPage.learnMore') }}</RouterLink>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logos -->
+    <section class="gp-partners section section--muted" :aria-label="t('landingPage.partnersAria')">
+      <div class="container gp-partners__row">
+        <img v-for="(src, i) in partnerLogos" :key="i" :src="src" alt="" loading="lazy" />
+      </div>
+    </section>
   </main>
 </template>
 
 <style scoped>
-.landing-main {
-  overflow-x: hidden;
-}
-
 .container {
   width: min(100% - 2.5rem, var(--max-width));
   margin-inline: auto;
 }
 
 .section {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
+  padding-block: clamp(3.25rem, 8vw, 5.75rem);
 }
 
-.section-title {
-  font-size: clamp(1.75rem, 4vw, 2.35rem);
-  font-weight: 800;
-  color: var(--navy);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+.section--muted {
+  background: var(--brand-shell);
 }
 
-.section-title--center {
+.gp {
+  overflow-x: clip;
+  background: var(--white);
+}
+
+.gp-section-title {
+  margin: 0 auto 2rem;
   text-align: center;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--brand-teal);
+  max-width: 42rem;
+  line-height: 1.22;
 }
 
-.section-title--light {
-  color: var(--navy);
+.gp-section-title--left {
+  margin-left: 0;
+  text-align: left;
+  max-width: none;
 }
 
-.btn {
+.gp-section-title--inv {
+  color: var(--white);
+}
+
+/* Hero */
+.gp-hero {
+  position: relative;
+  isolation: isolate;
+  padding-top: clamp(5rem, 10vw, 6.5rem);
+}
+
+.gp-hero--waves::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 130% 42% at 50% -8%, rgba(1, 6, 71, 0.045), transparent 58%),
+    radial-gradient(ellipse 125% 38% at 50% 108%, rgba(1, 6, 71, 0.038), transparent 55%),
+    repeating-linear-gradient(
+      -8deg,
+      transparent,
+      transparent 76px,
+      rgba(203, 203, 203, 0.11) 76px,
+      rgba(203, 203, 203, 0.11) 77px
+    ),
+    #ffffff;
+  opacity: 1;
+}
+
+.gp-hero--waves::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 28% at 8% 22%, rgba(0, 169, 164, 0.06), transparent 70%),
+    radial-gradient(ellipse 85% 26% at 92% 78%, rgba(255, 100, 0, 0.055), transparent 68%);
+}
+
+.gp-hero__grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .gp-hero__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.gp-hero__eyebrow {
+  margin: 0 0 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-teal);
+}
+
+.gp-hero__title {
+  margin: 0 0 1rem;
+  font-family: ui-serif, Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.85rem, 4vw, 2.85rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--brand-plum);
+}
+
+.gp-hero__title-mark {
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--brand-orange);
+}
+
+.gp-hero__sub {
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--brand-muted);
+  max-width: 42ch;
+}
+
+.gp-hero__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: clamp(280px, 42vw, 440px);
+}
+
+.gp-hero__deco {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gp-hero__blob {
+  position: absolute;
+  left: 50%;
+  bottom: 7%;
+  width: min(78%, 340px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translateX(-47%);
+  background: radial-gradient(circle at 38% 36%, rgba(198, 228, 252, 0.95), rgba(215, 238, 255, 0.35));
+}
+
+.gp-hero__ring {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.gp-hero__ring--solid {
+  width: min(92%, 405px);
+  aspect-ratio: 1;
+  border: 2px solid rgba(40, 33, 76, 0.26);
+}
+
+.gp-hero__ring--dashed {
+  width: min(108%, 475px);
+  aspect-ratio: 1;
+  bottom: 1%;
+  border: 2px dashed rgba(0, 169, 164, 0.34);
+}
+
+.gp-hero__arc {
+  position: absolute;
+  border-radius: 50%;
+  border: 13px solid transparent;
+  box-sizing: border-box;
+}
+
+.gp-hero__arc--teal {
+  width: clamp(160px, 28vw, 220px);
+  height: clamp(160px, 28vw, 220px);
+  border-top-color: var(--brand-teal);
+  border-right-color: var(--brand-teal);
+  top: 5%;
+  left: 2%;
+  transform: rotate(-42deg);
+}
+
+.gp-hero__arc--orange {
+  border-top-color: var(--brand-orange);
+  border-right-color: var(--brand-orange);
+}
+
+.gp-hero__arc--o1 {
+  width: clamp(150px, 26vw, 205px);
+  height: clamp(150px, 26vw, 205px);
+  top: 8%;
+  right: 0;
+  transform: rotate(48deg);
+}
+
+.gp-hero__arc--o2 {
+  width: clamp(135px, 24vw, 185px);
+  height: clamp(135px, 24vw, 185px);
+  bottom: 14%;
+  left: 0;
+  transform: rotate(205deg);
+}
+
+.gp-hero__squiggle {
+  position: absolute;
+  width: clamp(42px, 9vw, 68px);
+  height: auto;
+  opacity: 0.94;
+}
+
+.gp-hero__squiggle--tl {
+  top: 2%;
+  left: 0;
+}
+
+.gp-hero__squiggle--br {
+  bottom: 10%;
+  right: 2%;
+}
+
+.gp-hero__photo {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  height: auto;
+  object-fit: contain;
+}
+
+.gp-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 1.35rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
+  padding: 0.78rem 1.85rem;
+  border-radius: 10px;
+  font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
   border: none;
+  cursor: pointer;
   transition:
     transform 0.15s,
     box-shadow 0.2s;
 }
 
-.btn--yellow {
-  background: var(--yellow);
-  color: var(--navy);
-}
-
-.btn--yellow:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 28px rgba(247, 209, 94, 0.45);
-}
-
-.btn--outline {
-  border: 2px solid var(--navy);
-  color: var(--navy);
-  background: transparent;
-}
-
-.btn--outline:hover {
-  background: var(--navy);
+.gp-btn--orange {
+  background: var(--brand-orange);
   color: var(--white);
+  box-shadow: 0 10px 28px rgba(255, 100, 0, 0.35);
 }
 
-/* Hero */
-.hero__grid {
+.gp-btn--orange:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(255, 100, 0, 0.45);
+}
+
+/* Intro */
+.gp-intro__grid {
   display: grid;
-  gap: 2.5rem;
-  align-items: center;
-}
-
-@media (min-width: 900px) {
-  .hero__grid {
-    grid-template-columns: 1fr 1.05fr;
-    gap: 3rem;
-  }
-}
-
-.hero__title {
-  font-size: clamp(2rem, 5vw, 3.1rem);
-  font-weight: 800;
-  color: var(--navy);
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.25rem;
-}
-
-.brush {
-  position: relative;
-  z-index: 0;
-  white-space: nowrap;
-}
-
-.brush::after {
-  content: '';
-  position: absolute;
-  left: -0.12em;
-  right: -0.12em;
-  bottom: 0.08em;
-  height: 0.42em;
-  background: var(--mint);
-  opacity: 0.75;
-  border-radius: 6px;
-  z-index: -1;
-  transform: rotate(-1.5deg) skewX(-3deg);
-}
-
-.hero__sub {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  max-width: 34ch;
-  margin-bottom: 1.75rem;
-}
-
-.hero__cta {
-  padding: 0.85rem 1.85rem;
-  border-radius: var(--radius-md);
-  margin-bottom: 1.75rem;
-}
-
-.hero__trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem 2rem;
-}
-
-.trust-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-}
-
-.trust-item svg {
-  color: var(--mint);
-  flex-shrink: 0;
-}
-
-.hero__photo-wrap {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
-
-.hero__photo {
-  width: 100%;
-  object-fit: cover;
-  aspect-ratio: 5 / 4;
-}
-
-.float-card {
-  position: absolute;
-  background: var(--white);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 12px 40px rgba(0, 11, 51, 0.12);
-  padding: 0.75rem 1rem;
-  font-size: 0.8rem;
-}
-
-.float-card--chart {
-  top: 12%;
-  left: 8%;
-}
-
-.mini-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 4px;
-  height: 36px;
-  margin-bottom: 0.35rem;
-}
-
-.mini-bars span {
-  width: 8px;
-  border-radius: 3px;
-  background: linear-gradient(180deg, var(--mint), #6eb5ff);
-}
-
-.mini-bars span:nth-child(1) {
-  height: 40%;
-}
-.mini-bars span:nth-child(2) {
-  height: 65%;
-}
-.mini-bars span:nth-child(3) {
-  height: 50%;
-}
-.mini-bars span:nth-child(4) {
-  height: 85%;
-}
-
-.float-card__label {
-  font-weight: 600;
-  color: var(--navy);
-  font-size: 0.75rem;
-}
-
-.float-card--stat {
-  bottom: 18%;
-  right: 6%;
-  text-align: center;
-}
-
-.float-card--stat strong {
-  display: block;
-  font-size: 1.1rem;
-  color: var(--navy);
-}
-
-.float-card--stat span {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-
-.float-card--badge {
-  top: 22%;
-  right: 10%;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.95rem;
-  color: var(--navy);
-  background: var(--yellow);
-  padding: 0;
-}
-
-/* Features */
-.features__head {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .features__head {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
-
-  .features__head .section-title {
-    max-width: 20ch;
+  .gp-intro__grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.features__grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-}
-
-.feature-card {
+.gp-intro-card {
   background: var(--white);
-  border: 1px solid rgba(0, 11, 51, 0.06);
   border-radius: var(--radius-md);
-  padding: 1.5rem 1.35rem;
-  box-shadow: 0 4px 24px rgba(0, 11, 51, 0.04);
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
+  padding: 1.75rem 1.35rem;
+  text-align: center;
+  border: 1px solid rgba(1, 6, 71, 0.06);
+  box-shadow: 0 10px 36px rgba(1, 6, 71, 0.06);
 }
 
-.feature-card:hover {
-  box-shadow: var(--shadow-card);
-  transform: translateY(-2px);
+.gp-intro-card__icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1rem;
+  object-fit: contain;
 }
 
-.feature-card__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
+.gp-intro-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--brand-teal);
 }
 
-.feature-card__icon--1 {
-  background: #e8f4ff;
-  color: #2563eb;
-}
-.feature-card__icon--2 {
-  background: #fff4e0;
-  color: #d97706;
-}
-.feature-card__icon--3 {
-  background: #fef3c7;
-  color: #b45309;
-}
-.feature-card__icon--4 {
-  background: #e0f7f0;
-  color: #059669;
-}
-.feature-card__icon--5 {
-  background: #ede9fe;
-  color: #7c3aed;
-}
-.feature-card__icon--6 {
-  background: #fce7f3;
-  color: #db2777;
-}
-
-.feature-card h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--navy);
-}
-
-.feature-card p {
+.gp-intro-card p {
+  margin: 0;
   font-size: 0.92rem;
-  color: var(--text-muted);
   line-height: 1.55;
+  color: var(--brand-muted);
 }
 
-/* Mesh / flexibility */
-.mesh {
-  background:
-    radial-gradient(ellipse 90% 70% at 10% 30%, rgba(247, 209, 94, 0.95), transparent 55%),
-    radial-gradient(ellipse 80% 60% at 90% 20%, rgba(168, 230, 207, 0.9), transparent 50%),
-    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(110, 181, 255, 0.35), transparent 45%),
-    linear-gradient(125deg, #f7d15e 0%, #c8f0e0 42%, #8ec5ff 100%);
+.gp-intro-band {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.25rem;
+  align-items: stretch;
 }
 
-.mesh__grid {
+@media (min-width: 768px) {
+  .gp-intro-band {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(1, 6, 71, 0.07);
+    background: var(--white);
+    box-shadow: 0 12px 40px rgba(1, 6, 71, 0.06);
+    overflow: hidden;
+  }
+
+  .gp-intro-band__rule {
+    width: 1px;
+    align-self: stretch;
+    background: rgba(1, 6, 71, 0.1);
+    margin: 1.25rem 0;
+  }
+}
+
+.gp-intro-band__card {
+  padding: 1.35rem 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .gp-intro-band__card {
+    padding: 1.75rem 2rem;
+  }
+}
+
+.gp-intro-band__title {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--brand-teal);
+}
+
+.gp-intro-band__card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--brand-muted);
+}
+
+@media (max-width: 767px) {
+  .gp-intro-band__rule {
+    display: none;
+  }
+
+  .gp-intro-band__card {
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(1, 6, 71, 0.07);
+    background: var(--white);
+  }
+}
+
+/* Stats */
+.gp-stats__grid {
   display: grid;
   gap: 2.5rem;
   align-items: center;
 }
 
 @media (min-width: 900px) {
-  .mesh__grid {
-    grid-template-columns: 1fr 1fr;
+  .gp-stats__grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   }
 }
 
-.mesh__list {
-  list-style: none;
-  padding: 0;
-  margin-top: 2rem;
+.gp-stats__visual {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
+  justify-content: center;
 }
 
-.mesh__list li {
+.gp-stats__rings {
+  position: absolute;
+  width: min(340px, 80vw);
+  height: min(340px, 80vw);
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 100, 0, 0.35);
+  box-shadow: inset 0 0 0 22px rgba(0, 169, 164, 0.06);
+}
+
+.gp-stats__figure {
+  margin: 0;
+  position: relative;
+  width: min(320px, 78vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid var(--white);
+  box-shadow: var(--shadow-card);
+}
+
+.gp-stats__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gp-stats__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-orange);
+}
+
+.gp-stats__lead {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--brand-muted);
+}
+
+.gp-stats__bullets {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+
+.gp-stats__bullets li {
+  display: flex;
+  gap: 0.85rem;
   align-items: flex-start;
 }
 
-.mesh__num {
+.gp-stats__bico {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--white);
-  font-weight: 700;
-  font-size: 0.95rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(0, 169, 164, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.mesh__list h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 0.35rem;
-  color: var(--navy);
+.gp-stats__bico img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
-.mesh__list p {
-  font-size: 0.92rem;
-  color: var(--navy-soft);
-  opacity: 0.9;
+.gp-stats__bullets strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--brand-plum);
+  margin-bottom: 0.2rem;
 }
 
-.mesh__photo-wrap {
-  position: relative;
+.gp-stats__bullets p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--brand-muted);
+}
+
+.gp-stats__mini {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.gp-stats__pill {
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(1, 6, 71, 0.07);
+  box-shadow: 0 8px 28px rgba(1, 6, 71, 0.05);
+}
+
+.gp-stats__pill strong {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--brand-teal);
+}
+
+.gp-stats__pill span {
+  font-size: 0.82rem;
+  color: var(--brand-muted);
+}
+
+/* Showcase */
+.gp-showcase__banner {
+  margin: 0 auto 2rem;
+  width: min(100% - 2.5rem, var(--max-width));
   border-radius: var(--radius-lg);
   overflow: hidden;
+  border: 1px solid rgba(1, 6, 71, 0.06);
   box-shadow: var(--shadow-card);
 }
 
-.mesh__photo-wrap img {
+.gp-showcase__banner img {
   width: 100%;
-  object-fit: cover;
-  aspect-ratio: 4 / 3;
-}
-
-.gauge-card {
-  position: absolute;
-  bottom: 10%;
-  left: 8%;
-  background: var(--white);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
-  box-shadow: 0 12px 40px rgba(0, 11, 51, 0.15);
-  text-align: center;
-}
-
-.gauge {
-  position: relative;
-  width: 88px;
-  height: 88px;
-  margin: 0 auto 0.35rem;
-}
-
-.gauge__arc {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 8px solid #e8ecf4;
-  border-top-color: var(--mint);
-  border-right-color: #6eb5ff;
-  transform: rotate(-45deg);
-}
-
-.gauge__value {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: var(--navy);
-}
-
-.gauge-card__cap {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.mesh__stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-@media (min-width: 768px) {
-  .mesh__stats {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.mesh__stats strong {
+  height: auto;
   display: block;
-  font-size: 1.65rem;
-  font-weight: 800;
-  color: var(--white);
-  text-shadow: 0 1px 2px rgba(0, 11, 51, 0.15);
+  max-height: min(440px, 58vw);
+  object-fit: cover;
 }
 
-.mesh__stats span {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 500;
-}
-
-/* Pricing */
-.pricing__grid {
-  display: grid;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.price-card {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  padding: 2rem 1.5rem;
-  text-align: center;
-  border: 1px solid rgba(0, 11, 51, 0.06);
-  box-shadow: 0 8px 32px rgba(0, 11, 51, 0.06);
-}
-
-.wire-icon {
-  height: 72px;
+.gp-showcase__stack {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.wire-cube {
-  width: 48px;
-  height: 48px;
-  border: 2px solid var(--mint);
-  border-radius: 10px;
-  transform: rotate(-12deg) skewX(-6deg);
-  box-shadow: 4px 4px 0 rgba(168, 230, 207, 0.5);
-}
-
-.wire-cube--2 {
-  transform: rotate(8deg) skewX(4deg);
-}
-
-.wire-cube--3 {
-  width: 56px;
-  height: 40px;
-  transform: rotate(-6deg);
-}
-
-.price-card h3 {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--navy);
-  margin-bottom: 0.65rem;
-}
-
-.price-card p {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  line-height: 1.55;
-}
-
-/* Contact */
-.contact__grid {
+.gp-showcase__row {
   display: grid;
-  gap: 2.5rem;
-  align-items: start;
+  gap: 1.25rem;
 }
 
 @media (min-width: 900px) {
-  .contact__grid {
+  .gp-showcase__row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gp-showcase__mid {
+  display: flex;
+  justify-content: center;
+  padding-block: 0.25rem 0.75rem;
+}
+
+.gp-showcase__mid img {
+  width: min(100%, 420px);
+  height: auto;
+  filter: drop-shadow(0 18px 42px rgba(1, 6, 71, 0.14));
+}
+
+.gp-feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.45rem 1.25rem;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(1, 6, 71, 0.07);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s,
+    border-color 0.2s;
+}
+
+.gp-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(1, 6, 71, 0.1);
+}
+
+.gp-feature-card--featured {
+  border-color: rgba(255, 100, 0, 0.35);
+  box-shadow: 0 18px 48px rgba(255, 100, 0, 0.12);
+}
+
+.gp-feature-card__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 169, 164, 0.1);
+  color: var(--brand-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.gp-feature-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--brand-plum);
+}
+
+.gp-feature-card p {
+  margin: 0 0 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--brand-muted);
+  flex: 1;
+}
+
+.gp-feature-card__cta {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--brand-teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gp-feature-card__cta--orange {
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: var(--brand-orange);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* Manage */
+.gp-manage__grid {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .gp-manage__grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-.contact__sub {
-  color: var(--text-muted);
-  margin-top: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.social-row {
+.gp-manage__list {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
   display: flex;
-  gap: 0.65rem;
+  flex-direction: column;
+  gap: 1.35rem;
 }
 
-.social {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--white);
+.gp-manage__list li {
+  display: flex;
+  gap: 0.95rem;
+}
+
+.gp-manage__ico {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(0, 169, 164, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.85rem;
-  transition:
-    transform 0.15s,
-    background 0.2s;
 }
 
-.social:hover {
-  transform: scale(1.05);
-  background: var(--navy-soft);
+.gp-manage__ico img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
 }
 
-.social--inv {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.gp-manage__list h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--brand-plum);
 }
 
-.social--inv:hover {
-  background: rgba(255, 255, 255, 0.2);
+.gp-manage__list p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--brand-muted);
 }
 
-.contact__card {
-  background: var(--navy);
-  color: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 2rem 1.75rem;
-  box-shadow: var(--shadow-card);
+.gp-manage__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
-.contact__row + .contact__row {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+.gp-manage__rings {
+  position: absolute;
+  inset: 5% 8% auto;
+  height: min(380px, 70vw);
+  border-radius: 50%;
+  border: 2px solid rgba(0, 169, 164, 0.28);
+  box-shadow: 0 0 0 34px rgba(255, 100, 0, 0.06);
 }
 
-.contact__label {
-  display: block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.7;
-  margin-bottom: 0.35rem;
+.gp-manage__photo {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 400px);
+  height: auto;
 }
 
-.contact__card a {
-  color: var(--mint);
-  text-decoration: none;
-}
-
-.contact__card a:hover {
-  text-decoration: underline;
-}
-
-/* FAQ */
-.faq__sub {
+/* Pricing matrix */
+.gp-pricing__lead {
   text-align: center;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
+  margin: -0.75rem auto 0.35rem;
+  max-width: 42rem;
+  color: var(--brand-muted);
+  line-height: 1.55;
 }
 
-.faq__list {
-  list-style: none;
-  padding: 0;
-  max-width: 720px;
+.gp-pricing__sublead {
+  text-align: center;
+  margin: 0 auto 2rem;
+  max-width: 40rem;
+  font-size: 0.95rem;
+  color: var(--brand-muted);
+}
+
+.gp-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(1, 6, 71, 0.08);
+  box-shadow: 0 12px 40px rgba(1, 6, 71, 0.06);
+}
+
+.gp-matrix {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--white);
+}
+
+.gp-matrix thead {
+  background: var(--brand-teal);
+  color: var(--white);
+}
+
+.gp-matrix th,
+.gp-matrix td {
+  padding: 0.95rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(1, 6, 71, 0.06);
+}
+
+.gp-matrix thead th:first-child,
+.gp-matrix tbody th[scope='row'] {
+  text-align: left;
+  font-weight: 700;
+  color: var(--brand-plum);
+}
+
+.gp-matrix thead th:first-child {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gp-matrix tbody th {
+  background: rgba(243, 247, 247, 0.85);
+}
+
+.gp-matrix__methods-cell {
+  text-align: center !important;
+}
+
+.gp-matrix__methods-cell img {
+  max-height: 40px;
+  width: auto;
   margin-inline: auto;
 }
 
-.faq__item {
-  border-bottom: 1px solid rgba(0, 11, 51, 0.1);
+/* How */
+.gp-how {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 70% at 20% 40%, rgba(168, 230, 207, 0.35), transparent 55%),
+    radial-gradient(ellipse 70% 60% at 85% 70%, rgba(40, 33, 76, 0.22), transparent 50%),
+    linear-gradient(145deg, #0d5c59 0%, #1a6f6b 38%, #28214c 100%);
 }
 
-.faq__q {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.15rem 0;
-  background: none;
-  border: none;
-  text-align: left;
+.gp-how__sub {
+  text-align: center;
+  margin: -1rem auto 2.25rem;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.88);
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--navy);
+  line-height: 1.55;
 }
 
-.faq__toggle {
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--text-muted);
-  flex-shrink: 0;
+.gp-steps {
+  display: grid;
+  gap: 1.75rem;
 }
 
-.faq__a {
-  padding-bottom: 1.15rem;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
+@media (min-width: 900px) {
+  .gp-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .gp-step:not(:first-child) {
+    border-left: 2px dashed rgba(255, 255, 255, 0.28);
+    padding-left: 1.5rem;
+    margin-left: 0;
+  }
 }
 
-/* CTA row */
-.mesh--cta {
-  padding-block: clamp(2.5rem, 6vw, 4rem);
+.gp-step {
+  position: relative;
+  text-align: center;
+  padding: 1rem 1.15rem;
+  color: rgba(255, 255, 255, 0.95);
 }
 
-.cta-row {
+@media (max-width: 899px) {
+  .gp-step + .gp-step {
+    padding-top: 1.75rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.22);
+  }
+}
+
+.gp-step__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 0.65rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.gp-step__img {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1rem;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.15));
+}
+
+.gp-step h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.gp-step p {
+  margin: 0 0 0.85rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.gp-step__link {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ffe066;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gp-step__link:hover {
+  color: #fff;
+}
+
+/* Partners */
+.gp-partners__row {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  opacity: 0.85;
 }
 
-@media (min-width: 768px) {
-  .cta-row {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .cta-row__title {
-    max-width: 18ch;
-    margin: 0;
-  }
+.gp-partners__row img {
+  height: clamp(28px, 5vw, 44px);
+  width: auto;
+  filter: grayscale(1);
+  object-fit: contain;
 }
 </style>

@@ -13,8 +13,7 @@ import AppHeader from './components/AppHeader.vue'
 
 <style scoped>
 .page {
-  overflow-x: hidden;
-  padding-top: 72px;
+  padding-top: 112px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
